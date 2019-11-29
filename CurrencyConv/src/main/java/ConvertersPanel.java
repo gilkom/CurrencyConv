@@ -59,21 +59,7 @@ ConvertersPanel()
 	calculate = new JButton("Calculate");
 	calculate.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			//replacing commas with dots
-			fieldVal = currField.getText();
-			fieldVal = fieldVal.replace(',', '.');
-
-			//checking for wrong input value
-			try {				
-				pat = Pattern.compile(p);
-				mat = pat.matcher(fieldVal);
-				curRes = currMap.get((String) currChoserCombo.getSelectedItem());
-				result =(Double.valueOf(fieldVal)/curRes.getMid());
-				result = (double) Math.floor(result * 100d)/100d;
-				resultField.setText(String.valueOf(result) +" " + curRes.getCode());
-			}catch(NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null, "Wrong pattern");
-			}
+			calculate(currField.getText());
 		}
 	});
 	
@@ -106,5 +92,23 @@ ConvertersPanel()
 	}
 	public Map<String,Currency> getCurrencyMap(){
 		return currMap;
+	}
+	
+	public void calculate(String enteredValue) {
+		//replacing commas with dots
+		fieldVal = enteredValue;
+		fieldVal = fieldVal.replace(',', '.');
+
+		//checking for wrong input value
+		try {				
+			pat = Pattern.compile(p);
+			mat = pat.matcher(fieldVal);
+			curRes = currMap.get((String) currChoserCombo.getSelectedItem());
+			result =(Double.valueOf(fieldVal)/curRes.getMid());
+			result = (double) Math.floor(result * 100d)/100d;
+			resultField.setText(String.valueOf(result) +" " + curRes.getCode());
+		}catch(NumberFormatException ex) {
+			JOptionPane.showMessageDialog(null, "Wrong pattern");
+		}
 	}
 }

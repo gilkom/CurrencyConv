@@ -8,7 +8,7 @@ import javax.xml.transform.*;
 import org.w3c.dom.Document;
 import org.xml.sax.*;
 
-//class gets xml file and parse it 
+//class gets xml file and parses it 
 public class GetXML {
 	private Map<String,Currency> currMap;
 	private String link;
