@@ -1,7 +1,7 @@
-Main.class
-ConvertersPanel$2.class
-Currency.class
-Parser.class
-ConvertersPanel$1.class
-GetXML.class
-ConvertersPanel.class
+Converter\Currency.class
+Converter\ConvertersPanel$2.class
+Converter\ConvertersPanel$1.class
+Converter\GetXML.class
+Converter\Main.class
+Converter\ConvertersPanel.class
+Converter\Parser.class

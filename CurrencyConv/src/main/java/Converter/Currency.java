@@ -1,9 +1,16 @@
+package Converter;
 
 public class Currency {
 	private String curren;
 	private String code;
 	private double mid;
 	
+	
+	public void setCurrencyValue(String curren, String code, double mid) {
+		this.curren = curren;
+		this.code = code;
+		this.mid = mid;
+	}
 	public String getCurren() {
 		return curren;
 	}
@@ -22,7 +29,7 @@ public class Currency {
 	public void setMid(double mid) {
 		this.mid = mid;
 	}
-	Currency() {}
+	public Currency() {}
 	public Currency(String curren,String code, double mid) {
 		this.curren = curren;
 		this.code = code;

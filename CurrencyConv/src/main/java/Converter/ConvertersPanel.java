@@ -1,15 +1,12 @@
+package Converter;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.*;
 import java.util.regex.*;
-
+ 
 import javax.swing.*;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
 
 
 public class ConvertersPanel {
@@ -20,23 +17,22 @@ public class ConvertersPanel {
 	private JPanel south;
 	private JLabel comboLabel;
 	private JLabel currFieldLabel;
-	private JComboBox currChoserCombo;
+	private JComboBox<String> currChoserCombo;
 	private JTextField currField;
 	private JTextField resultField;
-	private JButton calculate;
+	private JButton calculateBut;
 	private GetXML getX;
 	private String[] table;
 	private Map<String,Currency> currMap;
 	private Set<String> names;
-	private Double result;
+	private String result;
 	private Pattern pat;
-	private Matcher mat;
 	private Currency curRes;
 	private String fieldVal;
 	private String p = "\\d+\\.?\\d*";
 
-ConvertersPanel() 
-		throws ParserConfigurationException, SAXException, IOException, TransformerException{
+	public ConvertersPanel() 
+		{
 	frame = new JFrame("Currency Converter");
 	panel = new JPanel(new BorderLayout());
 	north = new JPanel();
@@ -50,16 +46,18 @@ ConvertersPanel()
 	table = names.toArray(new String[names.size()]);
 	//main panel elements:
 	comboLabel = new JLabel("Choose currency:");
-	currChoserCombo = new JComboBox(table);
+	currChoserCombo = new JComboBox<String>(table);
 	currFieldLabel = new JLabel("Enter value (z³oty):");
 	currField = new JTextField((20));
 	resultField = new JTextField(20);
 	resultField.setEditable(false);
 	
-	calculate = new JButton("Calculate");
-	calculate.addActionListener(new ActionListener() {
+	calculateBut = new JButton("Calculate");
+	calculateBut.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			calculate(currField.getText());
+			curRes = currMap.get((String) currChoserCombo.getSelectedItem());
+			result = calculate(currField.getText(),curRes);
+			resultField.setText(String.valueOf(result) +" " + curRes.getCode());
 		}
 	});
 	
@@ -67,7 +65,7 @@ ConvertersPanel()
 	north.add(currField);
 	center.add(comboLabel);
 	center.add(currChoserCombo);
-	south.add(calculate);
+	south.add(calculateBut);
 	south.add(resultField);
 	
 	panel.add(north, BorderLayout.NORTH);
@@ -88,13 +86,14 @@ ConvertersPanel()
 }
 
 	public void setCurrencyMap(GetXML getX) {
-		this.currMap = getX.getCurrencyMap();
+		this.currMap = getX.getCurrenMap();
 	}
 	public Map<String,Currency> getCurrencyMap(){
 		return currMap;
 	}
 	
-	public void calculate(String enteredValue) {
+	public String calculate(String enteredValue, Currency curResult) {
+		Double calcResult = 0.0;
 		//replacing commas with dots
 		fieldVal = enteredValue;
 		fieldVal = fieldVal.replace(',', '.');
@@ -102,13 +101,14 @@ ConvertersPanel()
 		//checking for wrong input value
 		try {				
 			pat = Pattern.compile(p);
-			mat = pat.matcher(fieldVal);
-			curRes = currMap.get((String) currChoserCombo.getSelectedItem());
-			result =(Double.valueOf(fieldVal)/curRes.getMid());
-			result = (double) Math.floor(result * 100d)/100d;
-			resultField.setText(String.valueOf(result) +" " + curRes.getCode());
+			pat.matcher(fieldVal);
+			calcResult =(Double.valueOf(fieldVal)/curResult.getMid());
+			calcResult = (double) Math.floor(calcResult * 100d)/100d;
+			//resultField.setText(String.valueOf(result) +" " + curRes.getCode());
+			
 		}catch(NumberFormatException ex) {
 			JOptionPane.showMessageDialog(null, "Wrong pattern");
 		}
+		return Double.toString(calcResult);
 	}
 }

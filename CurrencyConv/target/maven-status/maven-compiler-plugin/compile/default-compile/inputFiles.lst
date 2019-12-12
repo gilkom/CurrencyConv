@@ -1,5 +1,5 @@
-D:\Git\CurrencyConv\CurrencyConv\src\main\java\Main.java
-D:\Git\CurrencyConv\CurrencyConv\src\main\java\ConvertersPanel.java
-D:\Git\CurrencyConv\CurrencyConv\src\main\java\GetXML.java
-D:\Git\CurrencyConv\CurrencyConv\src\main\java\Parser.java
-D:\Git\CurrencyConv\CurrencyConv\src\main\java\Currency.java
+D:\Git\CurrencyConv\CurrencyConv\src\main\java\Converter\ConvertersPanel.java
+D:\Git\CurrencyConv\CurrencyConv\src\main\java\Converter\Parser.java
+D:\Git\CurrencyConv\CurrencyConv\src\main\java\Converter\GetXML.java
+D:\Git\CurrencyConv\CurrencyConv\src\main\java\Converter\Currency.java
+D:\Git\CurrencyConv\CurrencyConv\src\main\java\Converter\Main.java

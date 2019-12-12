@@ -1,12 +1,12 @@
-
+package Converter;
 import java.util.*;
 import javax.xml.transform.*;
 import org.w3c.dom.*;
 
 //class gets the data from xml file and creates list of Currencies and its values
 public class Parser {
-	private Map<String,Currency> currMap;
 	private Currency curren;
+	private Map<String,Currency> currMap;
 	private String key;
 	private String repl;
 	private NodeList nodeLst;
@@ -24,7 +24,7 @@ public class Parser {
 	private NodeList kursN;
 	
 	
-	Parser(Document doc) throws TransformerException {
+	public Parser(Document doc) throws TransformerException {
 		nodeLst = doc.getElementsByTagName("Rate");
 		currMap = new HashMap<String, Currency>();
 		
@@ -62,8 +62,9 @@ public class Parser {
 	public void setMap(String key, Currency cur ) {
 		this.currMap.put(key, cur);
 	}
-	public Map<String,Currency> getMap() {
+	public Map<String,Currency> getParserMap() {
 		return currMap;
 		
 	}
+
 }
